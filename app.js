@@ -4,6 +4,9 @@ const cors = require('cors')
 const db = require('./config/database');
 const bodyParser = require('body-parser')
 
+// const bcrypt = require('bcrypt');
+// const jwt = require('jsonwebtoken');
+
 const app = express();
 const port = process.env.PORT || "8000";
 
@@ -21,12 +24,14 @@ app.use('/uploads', express.static(__dirname + '/public/uploads'))
 
 var indexRouter = require('./routes/index');
 var registrationRouter = require('./routes/register');
+var loginRouter = require('./routes/login');
 // var recipesRouter = require('./routes/recipes');
 
 
 
 app.use('/api', indexRouter);
 app.use('/api/register', registrationRouter);
+app.use('/api/login',loginRouter);
 // app.use('/api/recipes/', recipesRouter);
 
 //old sdjfsldkjflsd

@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
   });
 
   router.post('/', registerController.checkEmail );
+  router.post('/add', registerController.addUser );
   
   // router.post('/', function(req, res, next) {
   //     console.log(req.body)
