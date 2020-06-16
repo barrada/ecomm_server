@@ -5,13 +5,14 @@ const db = require('./config/database');
 const bodyParser = require('body-parser')
 
 // const bcrypt = require('bcrypt');
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
+
 
 const app = express();
 const port = process.env.PORT || "8000";
 
 app.use(bodyParser.urlencoded({ extended: false }))
-
+// app.set('secretKey', 'ektibApi');
 // parse application/json
 app.use(bodyParser.json())
 
