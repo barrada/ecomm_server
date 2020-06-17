@@ -26,6 +26,7 @@ app.use('/uploads', express.static(__dirname + '/public/uploads'))
 var indexRouter = require('./routes/index');
 var registrationRouter = require('./routes/register');
 var loginRouter = require('./routes/login');
+var accountRouter = require('./routes/account');
 // var recipesRouter = require('./routes/recipes');
 
 
@@ -33,6 +34,7 @@ var loginRouter = require('./routes/login');
 app.use('/api', indexRouter);
 app.use('/api/register', registrationRouter);
 app.use('/api/login',loginRouter);
+app.use('/api/account',accountRouter);
 // app.use('/api/recipes/', recipesRouter);
 
 //old sdjfsldkjflsd

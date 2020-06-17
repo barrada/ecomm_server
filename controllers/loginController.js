@@ -1,7 +1,7 @@
 const loginController = {};
 const Login = require("../models/LoginModel");
-const test = require("../modules/mail.js")
-test.sendMail()
+// const test = require("../modules/mail.js")
+// test.sendVerificationMail()
 
 loginController.authenticate = async function (req, res, next) {
   email = req.body.email;
