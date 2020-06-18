@@ -29,6 +29,7 @@ Login.authenticate = async function(email,password){
       if(typeof userInfo != "undefined" && userInfo != null && userInfo.length != null
       && userInfo.length > 0){
         id=userInfo[0].id;
+        email=userInfo[0].email;
         firstname=userInfo[0].firstname;
         lastname=userInfo[0].lastname;
         dbpass=userInfo[0].password;
@@ -37,7 +38,7 @@ Login.authenticate = async function(email,password){
     
       passwordCheck = bcrypt.compareSync(password, dbpass);
       if(passwordCheck){
-          const token = jwt.sign({id: id, firstname: firstname, lastname: lastname, email_verified: email_verified, avatar: avatar}, 'EktibAPI');
+          const token = jwt.sign({id: id,email:email, firstname: firstname, lastname: lastname, email_verified: email_verified, avatar: avatar}, 'EktibAPI');
         //   console.log(jwt.verify(token,'EktibAPI'))
           // console.log(userInfo[0].lastname)
           return {token:token,data:{id,firstname,lastname,avatar,email_verified}};
