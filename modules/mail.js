@@ -50,3 +50,29 @@ const en_msg = {
 sgMail.send(msg);
   
 };
+
+
+exports.sendPassResetToken = function (email,lang,token) {
+   if(lang == 'ar') {
+    template = 'd-f01803fafffa4f85be1cb97a002f4075'
+    reset_url = `ar/account/resetpass?token=${token}`
+ 
+   }else{
+    template = 'd-7525700331264ee9a2c0865980b71ad5' 
+    reset_url = `account/resetpass?token=${token}`
+ 
+   }
+   msg = {
+    to: email,
+    from: 'accounts@ektib.com',
+    templateId:template,
+    dynamic_template_data: {
+    // name: firstname,
+    reset_url: reset_url ,
+    // text: 'Denver',
+  },
+
+   }
+//    console.log(reset_url)
+   sgMail.send(msg);
+}

@@ -1,6 +1,7 @@
 // require database
 const db = require("../config/database");
 const bcrypt = require("bcrypt");
+const saltRounds = 10;
 const jwt = require("jsonwebtoken");
 const mail = require("../modules/mail");
 
@@ -83,5 +84,64 @@ Account.userInfo = async function (userToken){
         return 403;
       }
 
+}
+// send password reset token
+Account.sendResetToken = async function (email,lang){
+    // console.log(email)
+    // check if email exists
+    checkQuery =  `SELECT count(*) as email_exists FROM ${users} WHERE email="${email}"`;
+    db.query(checkQuery, (err, res) => {
+       if(err){
+           return err
+       }else
+            result = JSON.parse(JSON.stringify(res))
+            email_exists =  result[0].email_exists
+            // console.log(email_exists)
+           if(email_exists == 1){
+               token = jwt.sign({email:email,lang:lang}, 'EktibAPI');
+                // console.log("exists")
+                // console.log(jwt.verify(token,'EktibAPI'))
+                mail.sendPassResetToken(email,lang,token)
+                // return {emailSent:'success'}
+                return 200
+ 
+           }else{
+               return 403
+            // console.log("noi")
+           }
+           
+      });
+}
+savePass = function(email,pass){
+  // UPDATE ${users} SET password= "thepass" WHERE users.email = "${email}"
+  hashedpassword = bcrypt.hashSync(pass, saltRounds);
+  // console.log(hashedpassword)
+  update_q = `UPDATE ${users} SET password= "${hashedpassword}" WHERE users.email = "${email}"`
+  db.query(update_q, (err, res) => {
+    if (err){
+        // throw err;
+        return 403;
+    } 
+    // console.log("success")
+    else{
+        return {reset:"success"}
+        // console.log("activated")
+    }
+  });
+}
+Account.saveNewPass = async function (token,pass){
+    // console.log("saved new pass")
+   jwt.verify(token, "EktibAPI", function (err, data){
+        if(err){
+            return 403
+        }
+        else{
+            // return data
+            // console.log(data.email)
+            // console.log(pass)
+            savePass(data.email,pass)
+        }
+    })
+    
 }
 module.exports = Account;
