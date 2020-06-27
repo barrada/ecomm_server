@@ -27,6 +27,7 @@ var indexRouter = require('./routes/index');
 var registrationRouter = require('./routes/register');
 var loginRouter = require('./routes/login');
 var accountRouter = require('./routes/account');
+var acceptpaymentRouter = require('./routes/acceptpayment');
 // var recipesRouter = require('./routes/recipes');
 
 
@@ -35,6 +36,7 @@ app.use('/api', indexRouter);
 app.use('/api/register', registrationRouter);
 app.use('/api/login',loginRouter);
 app.use('/api/account',accountRouter);
+app.use('/api/acceptpayment',acceptpaymentRouter);
 // app.use('/api/recipes/', recipesRouter);
 
 //old sdjfsldkjflsd

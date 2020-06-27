@@ -10,6 +10,8 @@ router.post('/sendResetToken', accountController.sendPassReset )
 router.post('/saveNewPassword', accountController.saveNewPassword )
 router.post('/getUserInfo',accountController.getUserInfo)
 
+
+
 // router.post('/', registerController.checkEmail );
 
 
